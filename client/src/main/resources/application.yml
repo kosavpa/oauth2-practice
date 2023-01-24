@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          simple-client-oidc:
+            provider: simple-provider
+            client-id: simple-client
+            client-secret: sec
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: simple-client-oidc
+          simple-client-authorization-code:
+            provider: simple-provider
+            client-id: simple-client
+            client-secret: sec
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/authorized"
+            scope: access
+            client-name: simple-client-authorization-code
+        provider:
+          simple-provider:
+            issuer-uri: http://authserver:9000
